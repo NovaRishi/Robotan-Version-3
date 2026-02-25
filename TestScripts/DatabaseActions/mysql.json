@@ -1,0 +1,85 @@
+{
+	"tasks": [
+		{
+			"name": "Connect to mysql",
+			"steps": [
+				{
+					"action": "database.connect_mysql",
+					"field": "connect to mysql",
+					"data": "",
+					"additional_data": {
+						"username": "#str::username#",
+						"password": "#str::password#",
+						"host_name": "#str::host_name#",
+						"port": "3306",
+						"database_name": "#str::database_name#"
+					}
+				}
+			]
+		},
+		{
+			"name": "Update mysql",
+			"steps": [
+				{
+					"action": "database.update_mysql",
+					"field": "update table mysql",
+					"data": "",
+					"additional_data": {
+						"query": "delete from employee where id = '2'"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "Query mysql",
+			"steps": [
+				{
+					"action": "database.query_mysql",
+					"field": "query table mysql",
+					"data": "",
+					"additional_data": {
+						"query": "select * from employee",
+						"header": "True"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "DisConnect to mysql",
+			"steps": [
+				{
+					"action": "database.disconnect_mysql",
+					"field": "disconnect",
+					"data": ""
+				}
+			]
+		},
+		{
+			"name": "Write Database Data in to Excel mysql",
+			"steps": [
+				{
+					"action": "filedata.write_excel",
+					"field": "insertRecordInExcel_mysql",
+					"data": "#str[][]::query table mysql#",
+					"additional_data": {
+						"target_directory": "#runtime::data_dir#",
+						"file_name": "outputExcel_mysql.xlsx",
+						"sheet_name": "output"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "End Positive",
+			"steps": [
+				{
+					"action": "helper.end",
+					"data": "Pass"
+				}
+			]
+		}
+	]
+}

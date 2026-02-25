@@ -1,0 +1,387 @@
+{
+	"tasks": [
+		{
+			"name": "Add Str variable",
+			"steps": [
+				{
+					"action": "storage.add_str",
+					"field": "Rishikesh_status",
+					"data": "Present in office"
+				},
+				{
+					"action": "storage.add_str",
+					"field": "Parth_status",
+					"data": "Present in office"
+				},
+				{
+					"action": "storage.add_str",
+					"field": "Aniket_status",
+					"data": "work from home"
+				},
+				{
+					"action": "storage.add_str",
+					"field": "Sameer_status",
+					"data": "Present in office"
+				},
+				{
+					"action": "storage.add_str",
+					"field": "Rahul_status",
+					"data": "work from home"
+				}
+			]
+		},
+		{
+			"name": "Get 1D Str Value",
+			"steps": [
+				{
+					"action": "robodb.connect",
+					"data": "",
+					"field": ""
+				},
+				{
+					"action": "robodb.import_excel",
+					"field": "credential",
+					"data": "login_credential.xlsx",
+					"additional_data": {
+						"Sheet_name": "Sheet1",
+						"Source_directory": "#runtime::lib_dir#\\Credentials\\",
+						"table_name": "cred"
+					}
+				},
+				{
+					"action": "robodb.select",
+					"field": "AMC_dets_2d",
+					"data": "select * from cred"
+				},
+				{
+					"action": "storage.add_str1d_in_str1d",
+					"field": "AMC_dets_1d",
+					"data": "#str[][]::AMC_dets_2d::r1#"
+				},
+				{
+					"action": "storage.add_str1d_in_str1d",
+					"field": "AMC_dets_1d_test",
+					"data": "#str[][]::AMC_dets_2d::r1#"
+				}
+			]
+		},
+		{
+			"name": "[loop start]",
+			"loop_array": "#str[][]::AMC_dets_2d#"
+		},
+		{
+			"name": "add str value",
+			"steps": [
+				{
+					"action": "storage.add_str",
+					"data": "#str[]::AMC_dets_1d::2#",
+					"field": "AMC_url_static"
+				},
+				{
+					"action": "storage.add_str",
+					"data": "#str[]::AMC_dets_1d::3#",
+					"field": "AMC_username_static"
+				},
+				{
+					"action": "storage.add_str",
+					"data": "#str[]::AMC_dets_1d::4#",
+					"field": "AMC_password_static"
+				},
+				{
+					"action": "storage.add_str",
+					"data": "#task::Link#",
+					"field": "AMC_url"
+				},
+				{
+					"action": "storage.add_str",
+					"data": "#task::LoginID#",
+					"field": "AMC_username"
+				},
+				{
+					"action": "storage.add_str",
+					"data": "#task::Password#",
+					"field": "AMC_password"
+				},
+				{
+					"action": "helper.concat",
+					"data": "#task::AMC#",
+					"field": "AMC"
+				},
+				{
+					"action": "helper.concat",
+					"data": "#task::Link#",
+					"field": "AMC"
+				},
+				{
+					"action": "helper.concat",
+					"data": "#task::LoginID#",
+					"field": "AMC"
+				},
+				{
+					"action": "storage.add_str",
+					"data": "#task::AMC##task::Link##task::LoginID##task::Password#",
+					"field": "concat str"
+				}
+			]
+		},
+		{
+			"name": "verify str values",
+			"steps": [
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_url_static",
+					"data": "#str[]::AMC_dets_1d::2#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_username_static",
+					"data": "#str[]::AMC_dets_1d::3#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_password_static",
+					"data": "#str[]::AMC_dets_1d::4#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_url",
+					"data": "#task::Link#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_username",
+					"data": "#task::LoginID#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_password",
+					"data": "#task::Password#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC",
+					"data": "#task::AMC##task::Link##task::LoginID#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "concat str",
+					"data": "#task::AMC##task::Link##task::LoginID##task::Password#"
+				}
+			]
+		},
+		{
+			"name": "Remove str",
+			"steps": [
+				{
+					"action": "storage.remove_str",
+					"data": "AMC_url",
+					"field": ""
+				},
+				{
+					"action": "storage.remove_str",
+					"data": "AMC_username",
+					"field": ""
+				},
+				{
+					"action": "storage.remove_str",
+					"data": "AMC_password",
+					"field": ""
+				},
+				{
+					"action": "storage.remove_str",
+					"field": "",
+					"data": "AMC_url_static"
+				},
+				{
+					"action": "storage.remove_str",
+					"field": "",
+					"data": "AMC_username_static"
+				},
+				{
+					"action": "storage.remove_str",
+					"field": "",
+					"data": "AMC_password_static"
+				},
+				{
+					"action": "storage.remove_str",
+					"field": "",
+					"data": "AMC_url"
+				},
+				{
+					"action": "storage.remove_str",
+					"field": "",
+					"data": "AMC_username"
+				},
+				{
+					"action": "storage.remove_str",
+					"field": "",
+					"data": "AMC_password"
+				},
+				{
+					"action": "storage.remove_str",
+					"field": "",
+					"data": "AMC"
+				},
+				{
+					"action": "storage.remove_str",
+					"field": "",
+					"data": "concat str"
+				}
+			]
+		},
+		{
+			"name": "verify str values after removing str",
+			"steps": [
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_url_static",
+					"data": "#str[]::AMC_dets_1d::2#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_username_static",
+					"data": "#str[]::AMC_dets_1d::3#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_password_static",
+					"data": "#str[]::AMC_dets_1d::4#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_url",
+					"data": "#task::Link#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_username",
+					"data": "#task::LoginID#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_password",
+					"data": "#task::Password#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC",
+					"data": "#task::AMC##task::Link##task::LoginID#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "concat str",
+					"data": "#task::AMC##task::Link##task::LoginID##task::Password#"
+				}
+			]
+		},
+		{
+			"name": "verify str values second time after removing str",
+			"steps": [
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_url_static",
+					"data": "#str[]::AMC_dets_1d::2#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_username_static",
+					"data": "#str[]::AMC_dets_1d::3#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_password_static",
+					"data": "#str[]::AMC_dets_1d::4#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_url",
+					"data": "#task::Link#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_username",
+					"data": "#task::LoginID#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC_password",
+					"data": "#task::Password#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "AMC",
+					"data": "#task::AMC##task::Link##task::LoginID#"
+				},
+				{
+					"action": "helper.verify_str",
+					"field": "concat str",
+					"data": "#task::AMC##task::Link##task::LoginID##task::Password#"
+				}
+			]
+		},
+		{
+			"name": "Remove 1d and 2d str",
+			"steps": [
+		        
+				{
+					"action": "storage.remove_str1d",
+					"field": "",
+					"data": "AMC_dets_1d_test"
+				},
+				{
+					"action": "storage.remove_str2d",
+					"field": "",
+					"data": "AMC_dets_2d"
+				}
+			]
+		},
+
+
+
+        {
+			"name": "verify 1d and 2d str",
+			"steps": [
+		        
+				{
+					"action": "storage.add_str1d_in_str2d",
+					"field": "AMC_dets_1d to 2d",
+					"data": "#str[]::AMC_dets_1d_test#"
+				},
+				{
+                    "action": "filedata.write_excel",
+                    "field": "verify writting",
+					 "data": "#str[][]::AMC_dets_1d to 2d#",
+                    "additional_data": {
+                        "target_directory": "#runtime::data_dir#",
+						"sheet_name": "sheet1",
+						"file_name":"AMC_dets_1d to 2d.xlsx"
+                    }
+                },
+				
+				{
+                    "action": "filedata.write_excel",
+                    "field": "verify writting",
+					 "data": "#str[][]::AMC_dets_2d#",
+                    "additional_data": {
+                        "target_directory": "#runtime::data_dir#",
+						"sheet_name": "sheet1",
+						"file_name":"AMC_dets.xlsx"
+                    }
+                }
+			]
+		},			
+				
+		{
+			"name": "[loop end]"
+		},
+		{
+			"name": "End Positive",
+			"steps": [
+				{
+					"action": "helper.end",
+					"data": "Pass"
+				}
+			]
+		}
+	]
+}

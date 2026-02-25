@@ -1,0 +1,41 @@
+{
+	"company": "Alfalabs",
+	"name": "PMS ValTrax Upload",
+	"monitor": {
+		"cpu": "10",
+		"disk space": "10",
+		"ram": "1",
+		"java": "17.0.10",
+		"os (name / version)": "Windows 11 / 10.0",
+		"robotan": "31stDec : 66",
+		"robotan core": "#revision#",
+		"user name": "Admin"
+	},
+	"str": {
+		"username": "Rishikesh",
+		"password": "@lfa1abs",
+		"host_name": "localhost",
+		"database_name": "companydb"
+	},
+	"flows": [
+		{
+			"str[][]": {
+				"EmployeeList": "{id, name, age, dob} {1, Rishikesh, 24, 2001-09-01} {2, Sameer, 23, 2002-03-15} {3, Aniket, 24, 2001-11-20} {4, Rahul, 26, 1999-07-08} {5, Shubham, 25, 1998-12-10} {6, Aman, 22, 2003-01-05} {7, Dipti, 24, 2000-06-17} {8, Jagannath, 27, 1997-03-22} {9, Aiman, 23, 2001-08-30} {10, Rohit, 26, 1998-11-12}"
+			},
+			"name": "Pre_Requisite"
+		},
+		{
+			
+			"name": "mssql"
+		},
+		{
+			
+			"name": "mysql"
+		},
+		{
+			
+			"name": "PostGre"
+		}
+		
+	]
+}

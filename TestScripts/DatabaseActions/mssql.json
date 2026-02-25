@@ -1,0 +1,85 @@
+{
+	"tasks": [
+		{
+			"name": "Connect to mssql",
+			"steps": [
+				{
+					"action": "database.connect_mssql",
+					"field": "connect to mssql",
+					"data": "",
+					"additional_data": {
+						"username": "#str::username#",
+						"password": "#str::password#",
+						"host_name": "#str::host_name#",
+						"port": "1433",
+						"database_name": "#str::database_name#"
+					}
+				}
+			]
+		},
+		{
+			"name": "Update mssql",
+			"steps": [
+				{
+					"action": "database.update_mssql",
+					"field": "update table mssql",
+					"data": "",
+					"additional_data": {
+						"query": "delete from employee where id = '2'"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "Query mssql",
+			"steps": [
+				{
+					"action": "database.query_mssql",
+					"field": "query table mssql",
+					"data": "",
+					"additional_data": {
+						"query": "select * from employee",
+						"header": "True"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "DisConnect to mssql",
+			"steps": [
+				{
+					"action": "database.disconnect_mssql",
+					"field": "disconnect",
+					"data": ""
+				}
+			]
+		},
+		{
+			"name": "Write Database Data in to Excel mssql",
+			"steps": [
+				{
+					"action": "filedata.write_excel",
+					"field": "insertRecordInExcel_mssql",
+					"data": "#str[][]::query table mssql#",
+					"additional_data": {
+						"target_directory": "#runtime::data_dir#",
+						"file_name": "outputExcel_mssql.xlsx",
+						"sheet_name": "output"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "End Positive",
+			"steps": [
+				{
+					"action": "helper.end",
+					"data": "Pass"
+				}
+			]
+		}
+	]
+}

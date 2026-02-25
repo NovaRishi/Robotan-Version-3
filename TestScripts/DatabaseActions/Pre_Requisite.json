@@ -1,0 +1,158 @@
+{
+	"tasks": [
+		{
+			"name": "Connect to mssql mysql postgrsql db",
+			"steps": [
+				{
+					"action": "database.connect_mssql",
+					"field": "connect to mssql",
+					"data": "",
+					"additional_data": {
+						"username": "#str::username#",
+						"password": "#str::password#",
+						"host_name": "#str::host_name#",
+						"port": "1433",
+						"database_name": "#str::database_name#"
+					}
+				},
+				{
+					"action": "database.connect_mysql",
+					"field": "connect to mysql",
+					"data": "",
+					"additional_data": {
+						"username": "#str::username#",
+						"password": "#str::password#",
+						"host_name": "#str::host_name#",
+						"port": "3306",
+						"database_name": "#str::database_name#"
+					}
+				},
+				{
+					"action": "database.connect_postgresql",
+					"field": "connect to postgrsql",
+					"data": "",
+					"additional_data": {
+						"username": "#str::username#",
+						"password": "#str::password#",
+						"host_name": "#str::host_name#",
+						"port": "5432",
+						"database_name": "#str::database_name#"
+					}
+				}
+			]
+		},
+		{
+			"name": "Delete table from mssql mysql postgrsql db",
+			"steps": [
+				{
+					"action": "database.update_mssql",
+					"field": "Delete table mssql",
+					"data": "",
+					"additional_data": {
+						"query": "DROP TABLE employee"
+					}
+				},
+				{
+					"action": "database.update_mysql",
+					"field": "Delete table mysql",
+					"data": "",
+					"additional_data": {
+						"query": "DROP TABLE employee"
+					}
+				},
+				{
+					"action": "database.update_postgresql",
+					"field": "Delete table postgrsql",
+					"data": "",
+					"additional_data": {
+						"query": "DROP TABLE employee"
+					}
+				}
+			]
+		},
+		{
+			"name": "Create table in mssql mysql postgrsql db",
+			"steps": [
+				{
+					"action": "database.update_mssql",
+					"field": "Create table mssql",
+					"data": "",
+					"additional_data": {
+						"query": "CREATE TABLE employee (id VARCHAR(10) PRIMARY KEY, name VARCHAR(50) NOT NULL,age VARCHAR(5) NOT NULL,dob VARCHAR(15) NOT NULL)"
+					}
+				},
+				{
+					"action": "database.update_mysql",
+					"field": "Create table mysql",
+					"data": "",
+					"additional_data": {
+						"query": "CREATE TABLE employee (id VARCHAR(10) PRIMARY KEY, name VARCHAR(50) NOT NULL,age VARCHAR(5) NOT NULL,dob VARCHAR(15) NOT NULL)"
+					}
+				},
+				{
+					"action": "database.update_postgresql",
+					"field": "Create table postgrsql",
+					"data": "",
+					"additional_data": {
+						"query": "CREATE TABLE employee (id VARCHAR(10) PRIMARY KEY, name VARCHAR(50) NOT NULL,age VARCHAR(5) NOT NULL,dob VARCHAR(15) NOT NULL)"
+					}
+				}
+			]
+		},
+		{
+			"name": "[loop start]",
+			"loop_array": "#str[][]::EmployeeList#"
+		},
+		{
+			"name": "Insert data in mssql mysql postgrsql db",
+			"steps": [
+				{
+					"action": "database.update_mssql",
+					"field": "update table mssql",
+					"data": "",
+					"additional_data": {
+						"query": "INSERT INTO employee (id, name, age, dob) VALUES('#task::id#','#task::name#', '#task::age#', '#task::dob#')"
+					}
+				},
+				{
+					"action": "database.update_mysql",
+					"field": "update table mysql",
+					"data": "",
+					"additional_data": {
+						"query": "INSERT INTO employee (id, name, age, dob) VALUES('#task::id#','#task::name#', '#task::age#', '#task::dob#')"
+					}
+				},
+				{
+					"action": "database.update_postgresql",
+					"field": "update table postgrsql",
+					"data": "",
+					"additional_data": {
+						"query": "INSERT INTO employee (id, name, age, dob) VALUES('#task::id#','#task::name#', '#task::age#', '#task::dob#')"
+					}
+				}
+			]
+		},
+		{
+			"name": "[loop end]"
+		},
+		{
+			"name": "DisConnect to PostGre",
+			"steps": [
+				{
+					"action": "database.disconnect_postgresql",
+					"field": "disconnect",
+					"data": ""
+				}
+			]
+		},
+		{
+			"name": "End Positive",
+			"steps": [
+				{
+					"action": "helper.end",
+					"data": "Pass"
+				}
+			]
+		}
+	]
+}

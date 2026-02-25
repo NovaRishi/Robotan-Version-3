@@ -1,0 +1,85 @@
+{
+	"tasks": [
+		{
+			"name": "Connect to PostGre",
+			"steps": [
+				{
+					"action": "database.connect_postgresql",
+					"field": "connect to postgrsql",
+					"data": "",
+					"additional_data": {
+						"username": "#str::username#",
+						"password": "#str::password#",
+						"host_name": "#str::host_name#",
+						"port": "5432",
+						"database_name": "#str::database_name#"
+					}
+				}
+			]
+		},
+		{
+			"name": "Update Postgre",
+			"steps": [
+				{
+					"action": "database.update_postgresql",
+					"field": "update table postgrsql",
+					"data": "",
+					"additional_data": {
+						"query": "delete from employee where id = '2'"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "Query Postgre",
+			"steps": [
+				{
+					"action": "database.query_postgresql",
+					"field": "query table postgrsql",
+					"data": "",
+					"additional_data": {
+						"query": "select * from employee",
+						"header": "True"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "DisConnect to PostGre",
+			"steps": [
+				{
+					"action": "database.disconnect_postgresql",
+					"field": "disconnect",
+					"data": ""
+				}
+			]
+		},
+		{
+			"name": "Write Database Data in to Excel PostGre",
+			"steps": [
+				{
+					"action": "filedata.write_excel",
+					"field": "insertRecordInExcel_postgresql",
+					"data": "#str[][]::query table postgrsql#",
+					"additional_data": {
+						"target_directory": "#runtime::data_dir#",
+						"file_name": "outputExcel_PostGre.xlsx",
+						"sheet_name": "output"
+						
+					}
+				}
+			]
+		},
+		{
+			"name": "End Positive",
+			"steps": [
+				{
+					"action": "helper.end",
+					"data": "Pass"
+				}
+			]
+		}
+	]
+}
